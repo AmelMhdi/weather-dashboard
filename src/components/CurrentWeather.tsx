@@ -65,7 +65,9 @@ export function CurrentWeather({
                 <h1 className="mb-2 text-2xl font-bold text-gray-800">{city}</h1>
                 <div className="flex items-center justify-center gap-4 my-4">
                     <img src={getWeatherIcon(description)} alt={description} className="w-20 h-20" />
-                    <p className="text-6xl font-bold text-gray-900 my-4">{units === 'metric' ? temperature : temperatureF}°</p>
+                    <p className="text-6xl font-bold text-gray-900 my-4 transition-all duration-300">
+                    {units === "metric" ? temperature : temperatureF}°
+                    </p>
                 </div>
                 <p className="text-lg text-gray-600 font-semibold">{description}</p>
             </div>
@@ -74,22 +76,22 @@ export function CurrentWeather({
             <div className="mx-6 grid grid-cols-2 gap-4">
                 <div className="bg-white rounded-lg shadow-md p-4">
                     <p className="text-sm text-gray-500 mb-1 font-semibold">Feels Like</p>
-                    <p className="text-2xl font-bold text-gray-900">{units === 'metric' ? feelsLike : feelsLikeF}°</p>
+                    <p className="text-2xl font-bold text-gray-900 transition-all duration-300">{units === "metric" ? feelsLike : feelsLikeF}°</p>
                 </div>
 
                 <div className="bg-white rounded-lg shadow-md p-4">
                     <p className="text-sm text-gray-500 mb-1 font-semibold">Humidity</p>
-                    <p className="text-2xl font-bold text-gray-900">{humidity}%</p>
+                    <p className="text-2xl font-bold text-gray-900 transition-all duration-300">{humidity}%</p>
                 </div>
 
                 <div className="bg-white rounded-lg shadow-md p-4">
                     <p className="text-sm text-gray-500 mb-1 font-semibold">Wind Speed</p>
-                    <p className="text-2xl font-bold text-gray-900">{units === 'metric' ? windSpeed : windSpeedMph} {units === 'metric' ? 'kph' : 'mph'}</p>
+                    <p className="text-2xl font-bold text-gray-900 transition-all duration-300">{units === "metric" ? windSpeed : windSpeedMph} {units === "metric" ? "kph" : "mph"}</p>
                 </div>
 
                 <div className="bg-white rounded-lg shadow-md p-4">
                     <p className="text-sm text-gray-500 mb-1 font-semibold">Precipitation</p>
-                    <p className="text-2xl font-bold text-gray-900">{units === 'metric' ? precipitation : precipitationIn} {units === 'metric' ? 'mm' : 'in'}</p>
+                    <p className="text-2xl font-bold text-gray-900 transition-all duration-300">{units === "metric" ? precipitation : precipitationIn} {units === "metric" ? "mm" : "in"}</p>
                 </div>
             </div>
         </>

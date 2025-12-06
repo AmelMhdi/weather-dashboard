@@ -69,9 +69,28 @@ function App() {
     <div className="min-h-screen bg-gray-50 p-4">
       <header className="px-6 py-4 flex items-center justify-between border-b border-gray-200">
         <h1 className="text-xl font-bold text-gray-800">Weather Now</h1>
-        <button onClick={() => setUnits(units === "metric" ? "imperial" : "metric")} className="px-4 py-2 text-sm font-semibold text-gray-700 border border-gray-300 rounded hover:bg-gray-100">
-          {units === "metric" ? "°C" : "°F"}
-        </button>
+        <div className="flex border border-gray-300 rounded overflow-hidden">
+          <button
+            onClick={() => setUnits('metric')}
+            className={`px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
+              units === 'metric' 
+                ? 'bg-gray-800 text-white' 
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            Metric
+          </button>
+          <button
+            onClick={() => setUnits('imperial')}
+            className={`px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
+              units === 'imperial' 
+                ? 'bg-gray-800 text-white' 
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            Imperial
+          </button>
+        </div>
       </header>
 
       <main>
