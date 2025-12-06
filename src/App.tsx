@@ -4,18 +4,23 @@ import { CurrentWeather } from "./components/CurrentWeather";
 
 interface WeatherData {
   temperature: number;
+  temperatureF: number;
   description: string;
   city: string;
   feelsLike: number;
+  feelsLikeF: number;
   humidity: number;
   windSpeed: number;
+  windSpeedMph: number;
   precipitation: number;
+  precipitationIn: number;
 }
 
 function App() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [units, setUnits] = useState<"metric" | "imperial">("metric");
 
   const handleSearch = async (query: string) => {
     setLoading(true);
@@ -34,12 +39,16 @@ function App() {
       const data = await response.json();
       const weatherData: WeatherData = {
         temperature: data.current.temp_c,
+        temperatureF: data.current.temp_f,
         description: data.current.condition.text,
         city: data.location.name,
         feelsLike: data.current.feelslike_c,
+        feelsLikeF: data.current.feelslike_f,
         humidity: data.current.humidity,
         windSpeed: data.current.wind_kph,
+        windSpeedMph: data.current.wind_mph,
         precipitation: data.current.precip_mm,
+        precipitationIn: data.current.precip_in,
       };
       setWeather(weatherData);
       console.log(weatherData);
@@ -58,8 +67,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4">
-      <header className="px-6 py-4 text-xl font-bold text-gray-800 border-b border-gray-200">
-        Weather Now
+      <header className="px-6 py-4 flex items-center justify-between border-b border-gray-200">
+        <h1 className="text-xl font-bold text-gray-800">Weather Now</h1>
+        <button onClick={() => setUnits(units === "metric" ? "imperial" : "metric")} className="px-4 py-2 text-sm font-semibold text-gray-700 border border-gray-300 rounded hover:bg-gray-100">
+          {units === "metric" ? "°C" : "°F"}
+        </button>
       </header>
 
       <main>
@@ -79,7 +91,7 @@ function App() {
           </div>
         )}
 
-        {weather && <CurrentWeather {...weather} />}
+        {weather && <CurrentWeather {...weather} units={units} />}
       </main>
     </div>
   )
