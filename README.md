@@ -1,73 +1,109 @@
-# React + TypeScript + Vite
+# Weather Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, minimalist weather application that allows users to check current weather conditions for any city worldwide. View temperature, humidity, wind speed, precipitation, and more with an intuitive interface.
 
-Currently, two official plugins are available:
+## 🌐 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**[View Live App](https://weather-dashboard-opal-seven.vercel.app)**
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Search weather for any city worldwide
+- Default city (Paris) loads automatically on page load
+- Current temperature with dynamic weather icons
+- Detailed weather metrics:
+  - Feels like temperature
+  - Humidity percentage
+  - Wind speed
+  - Precipitation amount
+- Clean, minimalist grayscale design
+- Fast loading with real-time data
+- Mobile-first responsive design
+- Loading and error states
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first styling
+- **Vite** - Build tool
+- **WeatherAPI** - Weather data provider
+- **Vercel** - Deployment platform
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/AmelMhdi/weather-dashboard.git
+
+cd weather-dashboard
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+npm install
 ```
+
+3. Create a `.env` file in the root directory:
+```bash
+VITE_WEATHER_API_KEY=your_api_key_here
+```
+
+4. Get your free API key:
+   - Sign up at [WeatherAPI.com](https://www.weatherapi.com/signup.aspx)
+   - Copy your API key
+   - Paste it in the `.env` file
+
+5. Run the development server:
+```bash
+npm run dev
+```
+
+6. Open [http://localhost:5173](http://localhost:5173) in your browser
+
+## 📦 Build for Production
+
+```bash
+npm run build
+npm run preview
+```
+
+## 🎯 Future Features (V2 Roadmap)
+
+- [ ] 7-day weather forecast
+- [ ] Hourly forecast with day selector
+- [ ] Imperial/Metric unit toggle
+- [ ] Responsive desktop layout
+- [ ] Smooth animations and transitions
+- [ ] Save favorite cities
+- [ ] Geolocation support
+- [ ] Dark mode
+
+## 📸 Screenshots
+
+### Mobile View
+![Mobile Screenshot](/public/screenshots/mobile.png)
+
+### Desktop View
+![Desktop Screenshot](/public/screenshots/desktop.png)
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- Weather data provided by [WeatherAPI.com](https://www.weatherapi.com/)
+- Design inspired by Frontend Mentor challenges
+- Icons from project assets
+
+---
+
+**Built with ❤️ by Amel**
