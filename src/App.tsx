@@ -100,7 +100,12 @@ function App() {
         
         {loading && (
           <div className="mx-6 my-4 text-center">
-            <p className="text-gray-600">Loading...</p>
+            <div className="flex justify-center items-center gap-2 mb-2">
+              <div className="w-3 h-3 bg-gray-800 rounded-full animate-pulse"></div>
+              <div className="w-3 h-3 bg-gray-800 rounded-full animate-pulse" style={{ animationDelay: "0.2s" }}></div>
+              <div className="w-3 h-3 bg-gray-800 rounded-full animate-pulse" style={{ animationDelay: "0.4s" }}></div>
+            </div>
+            <p className="text-gray-600 text-sm">Loading weather data...</p>
           </div>
         )}
 
