@@ -93,7 +93,7 @@ function App() {
         </div>
       </header>
 
-      <main>
+      <main className="max-w-3xl mx-auto">
         <section className="px-6 py-4 text-center font-bold text-3xl">How's the sky looking today?</section>
 
         <SearchBar onSearch={handleSearch} />
