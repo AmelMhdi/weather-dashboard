@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { SearchBar } from "./components/SearchBar"
+import { CurrentWeather } from "./components/CurrentWeather";
 
 interface WeatherData {
   temperature: number;
@@ -50,11 +51,19 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    // Default search for "Paris" on initial load
+    handleSearch("Paris");
+  }, []);
+
   return (
     <>
       <div className='p-8 text-2xl bg-blue-500'>Weather Dashboard</div>
 
       <SearchBar onSearch={handleSearch} />
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {weather && <CurrentWeather {...weather} />}
     </>
   )
 }
