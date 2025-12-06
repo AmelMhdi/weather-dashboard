@@ -1,6 +1,11 @@
-// current weather as props
-// display all info nicely
-// handle case when no data is available
+import sunnyIcon from "../../assets/icon-sunny.webp"
+import stormIcon from "../../assets/icon-storm.webp"
+import snowIcon from "../../assets/icon-snow.webp"
+import rainIcon from "../../assets/icon-rain.webp"
+import partlyCloudyIcon from "../../assets/icon-partly-cloudy.webp"
+import overcastIcon from "../../assets/icon-overcast.webp"
+import fogIcon from "../../assets/icon-fog.webp"
+import drizzleIcon from "../../assets/icon-drizzle.webp"
 
 interface WeatherProps {
     temperature: number;
@@ -21,12 +26,37 @@ export function CurrentWeather({
     windSpeed,
     precipitation
 }: WeatherProps) {
+    const getWeatherIcon = (description: string) => {
+        const condition = description.toLowerCase();
+        if (condition.includes("sunny") || condition.includes("clear")) {
+            return sunnyIcon;
+        } else if (condition.includes("partly cloudy")) {
+            return partlyCloudyIcon;
+        } else if (condition.includes("storm")) {
+            return stormIcon;
+        } else if (condition.includes("snow")) {
+            return snowIcon;
+        } else if (condition.includes("rain")) {
+            return rainIcon;
+        } else if (condition.includes("overcast") || condition.includes("cloudy")) {
+            return overcastIcon;
+        } else if (condition.includes("fog") || condition.includes("mist")) {
+            return fogIcon;
+        } else if (condition.includes("drizzle")) {
+            return drizzleIcon;
+        }
+
+        return partlyCloudyIcon
+    }
     return (
         <>
             {/* Main weather card */}
             <div className="mx-6 my-4 bg-white rounded-lg shadow-md p-8 text-center">
                 <h1 className="mb-2 text-2xl font-bold text-gray-800">{city}</h1>
-                <p className="text-6xl font-bold text-gray-900 my-4">{temperature}°C</p>
+                <div className="flex items-center justify-center gap-4 my-4">
+                    <img src={getWeatherIcon(description)} alt={description} className="w-20 h-20" />
+                    <p className="text-6xl font-bold text-gray-900 my-4">{temperature}°C</p>
+                </div>
                 <p className="text-lg text-gray-600 font-semibold">{description}</p>
             </div>
 
