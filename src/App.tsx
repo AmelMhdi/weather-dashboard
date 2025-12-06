@@ -52,7 +52,7 @@ function App() {
   }
 
   useEffect(() => {
-    // Default search for "Paris" on initial load
+    // Default search for "Paris"
     handleSearch("Paris");
   }, []);
 
