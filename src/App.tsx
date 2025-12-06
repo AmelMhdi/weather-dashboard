@@ -67,8 +67,18 @@ function App() {
 
         <SearchBar onSearch={handleSearch} />
         
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
+        {loading && (
+          <div className="mx-6 my-4 text-center">
+            <p className="text-gray-600">Loading...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="mx-6 my-4 text-center bg-red-50 border border-red-200 p-4 rounded-lg">
+            <p className="text-red-600 font-semibold">{error}</p>
+          </div>
+        )}
+
         {weather && <CurrentWeather {...weather} />}
       </main>
     </div>
