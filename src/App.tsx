@@ -57,14 +57,31 @@ function App() {
   }, []);
 
   return (
-    <>
-      <div className='p-8 text-2xl bg-blue-500'>Weather Dashboard</div>
+    <div className="min-h-screen bg-gray-50 p-4">
+      <header className="px-6 py-4 text-xl font-bold text-gray-800 border-b border-gray-200">
+        Weather Now
+      </header>
 
-      <SearchBar onSearch={handleSearch} />
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      {weather && <CurrentWeather {...weather} />}
-    </>
+      <main>
+        <section className="px-6 py-4 text-center font-bold text-3xl">How's the sky looking today?</section>
+
+        <SearchBar onSearch={handleSearch} />
+        
+        {loading && (
+          <div className="mx-6 my-4 text-center">
+            <p className="text-gray-600">Loading...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="mx-6 my-4 text-center bg-red-50 border border-red-200 p-4 rounded-lg">
+            <p className="text-red-600 font-semibold">{error}</p>
+          </div>
+        )}
+
+        {weather && <CurrentWeather {...weather} />}
+      </main>
+    </div>
   )
 }
 
