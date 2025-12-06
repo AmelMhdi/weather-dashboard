@@ -22,7 +22,7 @@ function App() {
     setError(null);
 
     try {
-      const API_KEY = "bf1cf1452777479381f103121250612";
+      const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
       const response = await fetch(
         `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${query}`
       );
