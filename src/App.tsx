@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { SearchBar } from "./components/SearchBar"
 import { CurrentWeather } from "./components/CurrentWeather";
+import { DailyForecast } from "./components/DailyForecast";
 
 interface WeatherData {
   temperature: number;
@@ -16,11 +17,21 @@ interface WeatherData {
   precipitationIn: number;
 }
 
+interface DailyForecast {
+  date: string;
+  maxTemp: number;
+  minTemp: number;
+  maxTempF: number;
+  minTempF: number;
+  condition: string;
+}
+
 function App() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [units, setUnits] = useState<"metric" | "imperial">("metric");
+  const [forecast, setForecast] = useState<DailyForecast[]>([]);
 
   const handleSearch = async (query: string) => {
     setLoading(true);
@@ -29,7 +40,7 @@ function App() {
     try {
       const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
       const response = await fetch(
-        `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${query}`
+        `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${query}&days=7`
       );
 
       if (!response.ok) {
@@ -37,6 +48,8 @@ function App() {
       }
 
       const data = await response.json();
+      console.log(data);
+
       const weatherData: WeatherData = {
         temperature: data.current.temp_c,
         temperatureF: data.current.temp_f,
@@ -50,8 +63,22 @@ function App() {
         precipitation: data.current.precip_mm,
         precipitationIn: data.current.precip_in,
       };
+
+      const forecastData: DailyForecast[] = data.forecast.forecastday.map((day: any) => ({
+        date: day.date,
+        maxTemp: day.day.maxtemp_c,
+        minTemp: day.day.mintemp_c,
+        maxTempF: day.day.maxtemp_f,
+        minTempF: day.day.mintemp_f,
+        condition: day.day.condition.text,
+      }));
+
       setWeather(weatherData);
-      console.log(weatherData);
+      console.log("Weather:", weatherData);
+
+      setForecast(forecastData);
+      console.log("Forecast:", forecastData);
+
       setLoading(false);
     } catch (error) {
       setError((error as Error).message);
@@ -93,7 +120,7 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto">
+      <main className="max-w-4xl mx-auto">
         <section className="px-6 py-4 text-center font-bold text-3xl">How's the sky looking today?</section>
 
         <SearchBar onSearch={handleSearch} />
@@ -116,6 +143,8 @@ function App() {
         )}
 
         {weather && <CurrentWeather {...weather} units={units} />}
+
+        <DailyForecast forecast={forecast} units={units} />
       </main>
     </div>
   )
