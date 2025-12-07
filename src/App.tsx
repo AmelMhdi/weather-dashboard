@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { SearchBar } from "./components/SearchBar"
 import { CurrentWeather } from "./components/CurrentWeather";
 import { DailyForecast } from "./components/DailyForecast";
+import { HourlyForecast } from "./components/HourlyForecast";
 
 interface WeatherData {
   temperature: number;
@@ -32,6 +33,15 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [units, setUnits] = useState<"metric" | "imperial">("metric");
   const [forecast, setForecast] = useState<DailyForecast[]>([]);
+  const [hourlyForecastData, setHourlyForecastData] = useState<Array<{
+    date: string;
+    hour: Array<{
+        time: string;
+        temp: number;
+        tempF: number;
+        condition: { text: string };
+    }>;
+  }>>([]);
 
   const handleSearch = async (query: string) => {
     setLoading(true);
@@ -73,11 +83,24 @@ function App() {
         condition: day.day.condition.text,
       }));
 
+      const hourlyForecastData = data.forecast.forecastday.map((day: any) => ({
+        date: day.date,
+        hour: day.hour.map((hourData: any) => ({
+          time: hourData.time,
+          temp: hourData.temp_c,
+          tempF: hourData.temp_f,
+          condition: hourData.condition,
+        })),
+      }));
+
       setWeather(weatherData);
       console.log("Weather:", weatherData);
 
       setForecast(forecastData);
       console.log("Forecast:", forecastData);
+
+      setHourlyForecastData(hourlyForecastData);
+      console.log("Hourly Forecast:", hourlyForecastData);
 
       setLoading(false);
     } catch (error) {
@@ -144,7 +167,9 @@ function App() {
 
         {weather && <CurrentWeather {...weather} units={units} />}
 
-        <DailyForecast forecast={forecast} units={units} />
+        {forecast.length > 0 && <DailyForecast forecast={forecast} units={units} />}
+
+        {hourlyForecastData.length > 0 && <HourlyForecast forecast={hourlyForecastData} units={units} />}
       </main>
     </div>
   )
