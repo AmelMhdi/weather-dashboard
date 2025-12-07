@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { SearchBar } from "./components/SearchBar"
 import { CurrentWeather } from "./components/CurrentWeather";
+import { DailyForecast } from "./components/DailyForecast";
 
 interface WeatherData {
   temperature: number;
@@ -119,7 +120,7 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto">
+      <main className="max-w-4xl mx-auto">
         <section className="px-6 py-4 text-center font-bold text-3xl">How's the sky looking today?</section>
 
         <SearchBar onSearch={handleSearch} />
@@ -142,6 +143,8 @@ function App() {
         )}
 
         {weather && <CurrentWeather {...weather} units={units} />}
+
+        <DailyForecast forecast={forecast} units={units} />
       </main>
     </div>
   )
