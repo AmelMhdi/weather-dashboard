@@ -1,5 +1,4 @@
-// create 7 cards with day name, high/low temps, weather icon
-// call different api endpoint for forecast data
+import { getWeatherIcon } from "../utils";
 
 interface DailyForecastProps {
     forecast: Array <{
@@ -35,9 +34,7 @@ export function DailyForecast({ forecast, units }: DailyForecastProps) {
                             <p className="text-sm font-semibold text-gray-800 mb-3">{getDayName(day.date)}</p>
 
                             {/* Weather icon placeholder */}
-                            <div className="w-12 h-12 bg-gray-200 rounded mx-auto mb-3">
-                                {/* Placeholder for weather icon */}
-                            </div>
+                            <img src={getWeatherIcon(day.condition)} alt={day.condition} className="w-12 h-12 mx-auto mb-3" />
                         </div>
 
                         {/* Temperatures */}
