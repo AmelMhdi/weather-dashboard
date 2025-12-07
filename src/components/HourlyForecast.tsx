@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getWeatherIcon } from "../utils";
 
 interface HourlyForecastProps {
     // define props for hourly forecast component
@@ -51,9 +52,31 @@ export function HourlyForecast({ forecast, units }: HourlyForecastProps) {
                 </select>
             </div>
 
-            {/* hourly forecast cards */}
-            <div className="space-y-2">
-                {/* todo: map through selectedDayData.hour */}
+            {/* Hourly cards */}
+            <div className="bg-gray-50 rounded-lg p-3 max-h-[514px] overflow-y-auto space-y-2">
+                {selectedDayData.hour.map((hourData, index) => (
+                    <div 
+                    key={index}
+                    className="bg-white rounded-lg shadow-md p-4 flex items-center justify-between"
+                    >
+                        {/* Left side: Icon and time */}
+                        <div className="flex items-center gap-4">
+                            <img 
+                            src={getWeatherIcon(hourData.condition.text)} 
+                            alt={hourData.condition.text}
+                            className="w-8 h-8"
+                            />
+                            <p className="text-sm font-semibold text-gray-800">
+                            {getHourFromTime(hourData.time)}
+                            </p>
+                        </div>
+
+                        {/* Right side: Temperature */}
+                        <p className="text-lg font-bold text-gray-900">
+                            {units === "metric" ? Math.round(hourData.temp) : Math.round(hourData.tempF)}°
+                        </p>
+                    </div>
+                ))}
             </div>
         </div>
     );
