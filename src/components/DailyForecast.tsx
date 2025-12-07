@@ -23,11 +23,11 @@ export function DailyForecast({ forecast, units }: DailyForecastProps) {
             <h2 className="text-xl font-bold text-gray-800 mb-4">Daily Forecast</h2>
             {/* TODO: map through forecast and create cards */}
 
-            <div className="flex gap-3 overflow-x-auto pb-2 justify-between">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:justify-between lg:gap-3">
                 {forecast.map((day) => (
                     <div 
                         key={day.date} 
-                        className="bg-white rounded-lg shadow-md p-4 shrink-0 w-26 text-center"
+                        className="bg-white rounded-lg shadow-md p-4 text-center lg:w-2/5"
                     >
                         <div className="flex-col items-center gap-4">
                             {/* Day name */}
