@@ -16,7 +16,6 @@ interface HourlyForecastProps {
 }
 
 export function HourlyForecast({ forecast, units }: HourlyForecastProps) {
-    // logic for hourly forecast component to be added later
     const [selectedDay, setSelectedDay] = useState(0); // index of selected day
 
     const getDayName = (dateString: string) => {
@@ -39,17 +38,25 @@ export function HourlyForecast({ forecast, units }: HourlyForecastProps) {
                 <h2 className="text-xl font-bold text-gray-800">Hourly Forecast</h2>
 
                 {/* todo: dropdown for day selection */}
-                <select
-                    value={selectedDay}
-                    onChange={(e) => setSelectedDay(Number(e.target.value))}
-                    className="px-4 py-2 text-sm font-semibold text-gray-700 border border-gray-300 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                >
-                    {forecast.map((day, index) => (
-                        <option key={day.date} value={index}>
-                            {getDayName(day.date)}
-                        </option>
-                    ))}
-                </select>
+                <div className="relative">
+                    <select
+                        value={selectedDay}
+                        onChange={(e) => setSelectedDay(Number(e.target.value))}
+                        className="appearance-none bg-white border border-gray-300 rounded-md pl-4 pr-10 py-2 text-sm font-semibold text-gray-800 cursor-pointer hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-colors"
+                    >
+                        {forecast.map((day, index) => (
+                            <option key={day.date} value={index}>
+                                {getDayName(day.date)}
+                            </option>
+                        ))}
+                    </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                </div>
+
+                </div>
             </div>
 
             {/* Hourly cards */}
