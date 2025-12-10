@@ -36,8 +36,6 @@ export function HourlyForecast({ forecast, units }: HourlyForecastProps) {
             {/* header with title and day selector */}
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-gray-800">Hourly Forecast</h2>
-
-                {/* todo: dropdown for day selection */}
                 <div className="relative">
                     <select
                         value={selectedDay}
@@ -60,7 +58,7 @@ export function HourlyForecast({ forecast, units }: HourlyForecastProps) {
             </div>
 
             {/* Hourly cards */}
-            <div className="bg-gray-50 rounded-lg p-3 max-h-[514px] overflow-y-auto space-y-2">
+            <div className="p-2 max-h-[655px] overflow-y-auto space-y-2">
                 {selectedDayData.hour.map((hourData, index) => (
                     <div 
                     key={index}

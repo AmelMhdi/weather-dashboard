@@ -165,11 +165,28 @@ function App() {
           </div>
         )}
 
-        {weather && <CurrentWeather {...weather} units={units} />}
+        {weather && (
+  <div className="lg:grid lg:grid-cols-3 lg:grid-rows-3 lg:gap-4">
+    {/* Current Weather - cols 1-2, rows 1-2 */}
+    <div className="lg:col-span-2 lg:row-span-2">
+      <CurrentWeather {...weather} units={units} />
+    </div>
 
-        {forecast.length > 0 && <DailyForecast forecast={forecast} units={units} />}
+    {/* Hourly Forecast - col 3, rows 1-3 (full height right side) */}
+    {hourlyForecastData.length > 0 && (
+      <div className="lg:col-start-3 lg:row-start-1 lg:row-span-3">
+        <HourlyForecast forecast={hourlyForecastData} units={units} />
+      </div>
+    )}
 
-        {hourlyForecastData.length > 0 && <HourlyForecast forecast={hourlyForecastData} units={units} />}
+    {/* Daily Forecast - cols 1-2, row 3 */}
+    {forecast.length > 0 && (
+      <div className="lg:col-span-2 lg:row-start-3">
+        <DailyForecast forecast={forecast} units={units} />
+      </div>
+    )}
+  </div>
+)}
       </main>
     </div>
   )
